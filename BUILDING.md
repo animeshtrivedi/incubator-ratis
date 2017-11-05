@@ -42,18 +42,15 @@ ratis-hadoop-shaded/src/main/java/
 ```
 They are not checked-in to git though.
 
-If you want to force compiling the proto files (for example after changing them),
-you should run
-```
-$ mvn package -DskipTests -Dcompile-protobuf
-```
+Protobuf compilation and shading are triggered
+when the corresponding shaded source directory is missing.
 
-For removing the shaded sources, run
-```
-$ mvn clean -Pclean-shade
-```
+During the clean lifecycle all the shaded classes are also deleted. You can clean the
+compiled files but keep the shaded classes with the following command:
 
-Note that `mvn clean` alone does not remove the shaded sources.
+```
+$ mvn clean -DskipCleanShade
+```
 
 ## What are shaded?
 
